@@ -1,17 +1,17 @@
 /*************************************************
-                                             
-The convert number uses the PACS table as a  
+
+The convert number uses the PACS table as a
 conversion function. This is a diagnostic function to display the
-FASC-N values as characters. 
+FASC-N values as characters.
 
 Dependencies:
 
 The external value for error must be defined
-                                              
+
 *************************************************/
 
  char convertCharacter(number)
-  char	number;
+  char  number;
 
 {
 
@@ -32,7 +32,7 @@ The external value for error must be defined
   case 0x0d: { return_value = '6'; /* 0000 1101 */
               break; }
   case 0x1c: { return_value = '7'; /* 0001 1100 */
-              break; }  
+              break; }
   case 0x02: { return_value = '8'; /* 0000 0010 */
               break; }
   case 0x13: { return_value = '9'; /* 0001 0011 */
