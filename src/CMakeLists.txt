@@ -1,0 +1,15 @@
+add_library(fascn
+  agencyCode.c
+  convertCharacter.c
+  credentialNumber.c
+  credentialSeries.c
+  expandFascn.c
+  individualCredential.c
+  organizationalCategory.c
+  organizationalIdentifier.c
+  personalIdentifier.c
+  PINumber.c
+  poa.c
+  systemCode.c
+  toint.c
+  )

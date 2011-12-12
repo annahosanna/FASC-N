@@ -14,6 +14,10 @@ This function requires the value of error to be defined externally
 #define msk 0x80 /* this is the most significant bit mask */
 #define addBit 0x01 /* this is a character with the least significant bit set */
 
+#ifndef error
+#define error 'Z' /* The error return value */
+#endif
+
 int expand_fascn(fascn25, fascn40)
  char fascn25[25], fascn40[40];
  {

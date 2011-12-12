@@ -2,7 +2,10 @@
 
 #include <stdio.h>
 
+#ifndef error
 #define error 'Z' /* The error return value */
+#endif
+
 char padded_fascn[25]; /* This is the 25-byte FASC-N format on the CAC/PIV card */
 char expanded_fascn[40]; /* The 40-byte expanded FASC-N format */
 char PI[10]; /* A text return of the personal identifier. Note, programmers must check array bounds */

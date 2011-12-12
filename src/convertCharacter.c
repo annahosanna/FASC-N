@@ -10,6 +10,11 @@ The external value for error must be defined
 
 *************************************************/
 
+#ifndef error
+#define error 'Z' /* The error return value */
+#endif
+
+
  char convertCharacter(number)
   char  number;
 
