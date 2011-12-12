@@ -7,7 +7,9 @@
 #define ss 0x1a /* 0001 1010 */
 #define fs 0x16 /* 0001 0110 */
 #define es 0x1f /* 0001 1111 */
+
 int debug_count = 0;
+char * referencefile;
 
 /*************************************************
 
@@ -102,8 +104,9 @@ int padd_function()
    /* If the test is true, add a 1 (change the least significant   */
    /* bit from a 0 to a 1.                                         */
 
-    if (temp & mask)
-  padded_fascn[padd_index] ^= add_bit; /* xor on a bit */
+    if (temp & mask) {
+      padded_fascn[padd_index] ^= add_bit; /* xor on a bit */
+      }
 
     /* Left shift the temp character to prepare for the next bit test */
 
@@ -140,14 +143,56 @@ int byteCount;
 
 
   FILE *fp;
-  if ((fp = fopen("fascn.dat", "w")) == NULL)
+  if ((fp = fopen("fascn.dat", "w")) == NULL) {
     return(1);
-  for(byteCount=0; byteCount<25; byteCount++)
+    }
+
+  for(byteCount=0; byteCount<25; byteCount++) {
    fputc(padded_fascn[byteCount], fp);
+   }
 
   fclose(fp);
   return(0);
 }
+
+
+  /************************************************************/
+  /*                                                          */
+  /* The compare_with_expected_fascn() will compare the       */
+  /* padded_fascn with one provided by an external file.      */
+  /*                                                          */
+  /************************************************************/
+
+int compare_with_expected_fascn()
+
+{
+int byteCount;
+char inputChar;
+
+
+  FILE *fp;
+  if ((fp = fopen(referencefile, "rb")) == NULL) {
+    printf("Error opening file %s\n",referencefile);
+    exit(1);
+    }
+
+  for(byteCount=0; byteCount<25; byteCount++) {
+    inputChar = fgetc(fp);
+    if( padded_fascn[byteCount] != inputChar ) {
+      printf("Error in padded_fascn byte %d\n",byteCount);
+      printf("Expected  %d \n", inputChar );
+      printf("and found %d \n", padded_fascn[byteCount] );
+      exit(1);
+      }
+    }
+
+  fclose(fp);
+
+  printf("Success in comparison with reference file\n");
+
+  return(0);
+}
+
 
  /******************************************************************/
  /*                                                                */
@@ -234,11 +279,13 @@ char *argv[];
  /* provide a warning message and terminate the program. Show what the    */
  /* correct call should be.                                               */
 
- if (argc != 10) {
+ if (argc != 11) {
   printf("Incorrect number of arguments for this function \n");
-  printf("fascnOut ac sc cn cs ici pi oc oi poa\n");
-  exit(0); }
-         /* initialize */
+  printf("fascnOut ac sc cn cs ici pi oc oi poa referencefile\n");
+  exit(1);
+  }
+
+ /* initialize */
 
  /* copy the strings into more meaningful nmenoics for */
 
@@ -251,6 +298,7 @@ char *argv[];
   strncpy(oc, argv[7], 1);
   strncpy(oi, argv[8], 4);
   strncpy(poa,argv[9], 1);
+  referencefile = argv[10];
 
  /* Expand the Agnecy Code (ac) starting at offset 1 */
 
@@ -301,6 +349,8 @@ char *argv[];
  padd_function();
 
  print_fascn(); /* binary print */
+
+ compare_with_expected_fascn();
 
 }
 
