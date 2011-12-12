@@ -1,6 +1,8 @@
 
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define ss 0x1a /* 0001 1010 */
 #define fs 0x16 /* 0001 0110 */

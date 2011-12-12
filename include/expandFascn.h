@@ -15,6 +15,6 @@ This function requires the value of error to be defined externally
 #ifndef expandFascn_h
 #define expandFascn_h
 
-int expand_fascn( char fascn25[25], fascn40[40] );
+int expand_fascn( char fascn25[25], char fascn40[40] );
 
 #endif

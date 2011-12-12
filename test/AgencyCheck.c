@@ -2,9 +2,14 @@
 
 #include <stdio.h>
 
-#ifndef error
-#define error 'Z' /* The error return value */
-#endif
+#include "toint.h"
+#include "convertCharacter.h"
+#include "errorCode.h"
+#include "expandFascn.h"
+#include "PINumber.h" /* Number return of PI */
+#include "organizationalCategory.h" /* Is NIST SP 800-87 used? */
+#include "organizationalIdentifier.h" /* Agency issuing FASC-N */
+
 
 char padded_fascn[25]; /* This is the 25-byte FASC-N format on the CAC/PIV card */
 char expanded_fascn[40]; /* The 40-byte expanded FASC-N format */
@@ -28,14 +33,6 @@ int read_fascn()
  fclose(fp);
  return(0);
 }
-
-#include "toint.c"
-#include "convertCharacter.c"
-#include "expandFascn.c"
-#include "PINumber.c" /* Number return of PI */
-#include "organizationalCategory.c" /* Is NIST SP 800-87 used? */
-#include "organizationalIdentifier.c" /* Agency issuing FASC-N */
-
 
 /******************************************
 

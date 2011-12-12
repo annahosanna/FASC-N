@@ -2,7 +2,21 @@
 
 #include <stdio.h>
 
-#define error 'Z' /* The error return value */
+#include "toint.h"
+#include "convertCharacter.h"
+#include "expandFascn.h"
+#include "personalIdentifier.h" /* text return of PI */
+#include "PINumber.h" /* Number return of PI */
+#include "agencyCode.h"
+#include "systemCode.h"
+#include "credentialNumber.h"
+#include "credentialSeries.h"
+#include "individualCredential.h"
+#include "organizationalCategory.h" /* Is NIST SP 800-87 used? */
+#include "organizationalIdentifier.h" /* Agency issuing FASC-N */
+#include "poa.h"
+#include "errorCode.h"
+
 char padded_fascn[25]; /* This is the 25-byte FASC-N format on the CAC/PIV card */
 char expanded_fascn[40]; /* The 40-byte expanded FASC-N format */
 char PI[10]; /* A text return of the personal identifier. Note, programmers must check array bounds */
@@ -25,20 +39,6 @@ int read_fascn()
  fclose(fp);
  return(0);
 }
-
-#include "toint.c"
-#include "convertCharacter.c"
-#include "expandFascn.c"
-#include "personalIdentifier.c" /* text return of PI */
-#include "PINumber.c" /* Number return of PI */
-#include "agencyCode.c"
-#include "systemCode.c"
-#include "credentialNumber.c"
-#include "credentialSeries.c"
-#include "individualCredential.c"
-#include "organizationalCategory.c" /* Is NIST SP 800-87 used? */
-#include "organizationalIdentifier.c" /* Agency issuing FASC-N */
-#include "poa.c"
 
 /******************************************
 
