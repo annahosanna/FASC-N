@@ -14,18 +14,10 @@ For DoD, VA, and other federal users, a value returned of 1 indicated the
 as specified in the National Institute of Standards & Technology (NIST)
 Special Publication 800-87 (current revision is 1)
 
-Dependencies:
-
-Requires the toint() function that converts a character in the range '0' to '9' to an integer.
-If the character converted is not '0' - '9' the function returns a value of 0.
-
 *****************************************************************/
+#ifndef organizationalCategory_h
+#define organizationalCategory_h
 
-#include "organizationalCategory.h"
+int organizational_category( char fascn[40] );
 
-int organizational_category( char fascn[40] )
-{
-  int temp;
-  temp = toint(fascn[32]);
-  return(temp);
-}
+#endif

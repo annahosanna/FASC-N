@@ -16,34 +16,9 @@ unrecognized.
 
 ********************************************************************/
 
-#include "toint.h"
+#ifndef toint_h
+#define toint_h
 
-int toint(ch)
-  char ch;
-{
-  int return_value;
-  switch (ch) {
-  case '0': { return_value = 0;
-    break; }
-  case '1': { return_value = 1;
-    break; }
-  case '2': { return_value = 2;
-    break; }
-  case '3': { return_value = 3;
-    break; }
-  case '4': { return_value = 4;
-    break; }
-  case '5': { return_value = 5;
-    break; }
-  case '6': { return_value = 6;
-    break; }
-  case '7': { return_value = 7;
-    break; }
-  case '8': { return_value = 8;
-    break; }
-  case '9': { return_value = 9;
-    break; }
-  default: return_value = 0;
-  }
-  return(return_value);
-}
+int toint( char ch );
+
+#endif

@@ -15,8 +15,9 @@ If the character converted is not '0' - '9' the function returns a value of 0.
 
 *****************************************************************************/
 
-long long PI_number(fascn)
-  char fascn[40];
+#include "PINumber.h"
+
+long long PI_number( char fascn[40] )
 {
   int index;
   long long PI;

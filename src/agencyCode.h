@@ -3,8 +3,9 @@
 As noted in the Technical Implementation Guidance:
 Smart Card Enabled Physical Access Control Systems
 
-CREDENTIAL SERIES (SERIES CODE)
-Field is available to reflect major system changes
+AGENCY CODE
+
+Identifies the government agency issuing the credential
 
 
 Dependencies:
@@ -14,11 +15,5 @@ If the character converted is not '0' - '9' the function returns a value of 0.
 
 ************************************************************************/
 
-#include "credentialSeries.h"
 
-int credential_series( char fascn[40] )
-{
-  int temp;
-  temp = toint(fascn[18]);
-  return(temp);
-}
+int agency_code( char fascn[40] );

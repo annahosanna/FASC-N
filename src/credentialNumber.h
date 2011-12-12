@@ -27,24 +27,10 @@ issued for all interoperable systems issuing FASC-N codes within their Agency.
 The combination of an Agency Code, System Code and Credential Number is a fully
 qualified number that is uniquely assigned to a single individual.
 
-
-Dependencies:
-
-Requires the toint() function that converts a character in the range '0' to '9' to an integer.
-If the character converted is not '0' - '9' the function returns a value of 0.
-
 ****************************************************************************/
+#ifndef credentialNumber_h
+#define credentialNumber_h
 
-#include "credentialNumber.h"
+long int credential_number( char fascn[40] );
 
-long int credential_number( char fascn[40] )
-{
-  long int temp;
-  temp = toint(fascn[11]) * 100000;
-  temp += toint(fascn[12]) * 10000;
-  temp += toint(fascn[13]) * 1000;
-  temp += toint(fascn[14]) * 100;
-  temp += toint(fascn[15]) * 10;
-  temp += toint(fascn[16]);
-  return(temp);
-}
+#endif

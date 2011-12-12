@@ -15,13 +15,9 @@ Users of string functions should ensure the proper termination of the string fun
 
 ***************************************************************************/
 
-#include "personalIdentifier.h"
+#ifndef personalIdentifier_h
+#define personalIdentifier_h
 
-int personalIdentifier( char fascn[40], char PI[10] )
-{
-  int index;
-  for (index=0; index<10; index++) {
-    PI[index] = fascn[22+index];
-    }
-  return(0);
-}
+int personalIdentifier( char fascn[40], char PI[10] );
+
+#endif

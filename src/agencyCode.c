@@ -15,9 +15,9 @@ If the character converted is not '0' - '9' the function returns a value of 0.
 
 ************************************************************************/
 
+#include "agencyCode.h"
 
-int agency_code(fascn)
-  char fascn[40];
+int agency_code( char fascn[40] )
 {
   int temp;
   temp = toint(fascn[1]) * 1000;

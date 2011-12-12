@@ -6,18 +6,13 @@ FASC-N values as characters.
 
 Dependencies:
 
-The external value for error must be defined
+The external value for errorCode must be defined
 
 *************************************************/
 
-#ifndef error
-#define error 'Z' /* The error return value */
-#endif
+#include "convertCharacter.h"
 
-
- char convertCharacter(number)
-  char  number;
-
+char convertCharacter( char number )
 {
 
   char return_value;
@@ -48,7 +43,7 @@ The external value for error must be defined
               break; }
   case 0x1f:   { return_value = 'E'; /* End Sentinel 0001 1111 */
               break; }
-  default:   { return_value = error; /* not a valid character */
+  default:   { return_value = errorCode; /* not a valid character */
               break; }
  }
    return(return_value);

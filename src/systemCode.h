@@ -22,21 +22,11 @@ qualified numbers. If a particular issuing system requires more than one million
 credentials issued then that system would require an additional system code assigned
 corresponding to each million credentials that will be issued by that system.
 
-Dependencies:
-
-Requires the toint() function that converts a character in the range '0' to '9' to an integer.
-If the character converted is not '0' - '9' the function returns a value of 0.
-
 ************************************************************************/
 
-#include "systemCode.h"
+#ifndef systemCode_h
+#define systemCode_h
 
-int system_code( char fascn[40] )
-{
-  int temp;
-  temp = toint(fascn[6]) * 1000;
-  temp += toint(fascn[7]) * 100;
-  temp += toint(fascn[8]) * 10;
-  temp += toint(fascn[9]);
-  return(temp);
-}
+int system_code( char fascn[40] );
+
+#endif

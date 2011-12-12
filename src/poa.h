@@ -12,19 +12,11 @@ PERSON/ORGANIZATION ASSOCIATION CATEGORY
 6 – Organizational Affiliate
 7 – Organizational Beneficiary
 
-
-Dependencies:
-
-Requires the toint() function that converts a character in the range '0' to '9' to an integer.
-If the character converted is not '0' - '9' the function returns a value of 0.
-
 ************************************************************************/
 
-#include "poa.h"
+#ifndef poa_h
+#define poa_h
 
-int person_organization_association( char fascn[40] )
-{
-  int temp;
-  temp = toint(fascn[37]);
-  return(temp);
-}
+int person_organization_association( char fascn[40] );
+
+#endif

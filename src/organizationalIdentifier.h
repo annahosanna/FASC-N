@@ -33,22 +33,11 @@ below:
 2400 OFFICE OF PERSONNEL MANAGEMENT
 2800 SOCIAL SECURITY ADMINISTRATION
 
-Dependencies:
-
-Requires the toint() function that converts a character in the range '0' to '9' to an integer.
-If the character converted is not '0' - '9' the function returns a value of 0.
-
 *****************************************************************/
 
-#include "organizationalIdentifier.h"
+#ifndef organizationalIdentifier_h
+#define organizationalIdentifier_h
 
-int organizational_identifier(fascn)
-  char fascn[40];
-{
-  int temp;
-  temp = toint(fascn[33]) * 1000;
-  temp += toint(fascn[34]) * 100;
-  temp += toint(fascn[35]) * 10;
-  temp += toint(fascn[36]);
-  return(temp);
-}
+int organizational_identifier( char fascn[40] );
+
+#endif

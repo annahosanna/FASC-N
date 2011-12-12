@@ -14,9 +14,7 @@ This function requires the value of error to be defined externally
 #define msk 0x80 /* this is the most significant bit mask */
 #define addBit 0x01 /* this is a character with the least significant bit set */
 
-#ifndef error
-#define error 'Z' /* The error return value */
-#endif
+#include "errorCode.h"
 
 int expand_fascn(fascn25, fascn40)
  char fascn25[25], fascn40[40];
@@ -28,23 +26,25 @@ int expand_fascn(fascn25, fascn40)
  for (bit_count = 0, byte_count = 0, expanded_index=0; byte_count < 25; byte_count++) {
    temp = fascn25[byte_count];
    for (bit_index=0; bit_index < 8; bit_index++) {
-    if (msk & temp) /* is the most significant bit in temp a 1? */
-     temp2 ^= addBit;  /* Then change the least significant bit in temp2 to a 1 */
+    if (msk & temp) {   /* is the most significant bit in temp a 1? */
+      temp2 ^= addBit;  /* Then change the least significant bit in temp2 to a 1 */
+      }
 
     temp <<= 1; /* shift left to prepare the next bit for testing */
 
     bit_count += 1;
     if ((bit_count % 5)== 0) { /* is this the 5th 1 or 0 printed? */
-    temp2= convertCharacter(temp2);
+      temp2= convertCharacter(temp2);
 
-    if (temp2==error)
-      return(1);
-    fascn40[expanded_index] = temp2; /* over write with value */
-    expanded_index += 1; /* increment the expanded index */
-    temp2 = 0;
-  } /* end if */
-    temp2 <<= 1;
-  } /* end inner for loop */
+      if (temp2==errorCode) {
+        return(1);
+        }
+      fascn40[expanded_index] = temp2; /* over write with value */
+      expanded_index += 1; /* increment the expanded index */
+      temp2 = 0;
+      } /* end if */
+     temp2 <<= 1;
+     } /* end inner for loop */
    } /* end for */
   return(0);
-  }
+ }
