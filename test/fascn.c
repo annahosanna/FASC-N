@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
-
 #define ss 0x1a /* 0001 1010 */
 #define fs 0x16 /* 0001 0110 */
 #define es 0x1f /* 0001 1111 */
@@ -194,7 +192,7 @@ int compare_output_string( char expected_string[240] )
  /* the number of 1's are counted and then divided using MOD 2     */
  /* or radix 2 division. If the result is 1, then there are an odd */
  /* number of 1's so a 0 is the least significant bit. In          */
- /* contrast, if the result is a 0, then a 1 is the aprity bit and */
+ /* contrast, if the result is a 0, then a 1 is the parity bit and */
  /* must be the least significant bit.                             */
  /*                                                                */
  /******************************************************************/
