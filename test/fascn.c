@@ -11,6 +11,8 @@
 #define es 0x1f /* 0001 1111 */
 int debug_count = 0;
 
+char outputString[240];
+
 /*************************************************/
 /*                                               */
 /* The convert number uses the PACS table as a   */
@@ -95,8 +97,9 @@ int padd_function()
    /* If the test is true, add a 1 (change the least significant   */
    /* bit from a 0 to a 1.                                         */
 
-    if (temp & mask)
-  padded_fascn[padd_index] ^= add_bit; /* xor on a bit */
+    if (temp & mask) {
+      padded_fascn[padd_index] ^= add_bit; /* xor on a bit */
+      }
 
     /* Left shift the temp character to prepare for the next bit test */
 
@@ -132,6 +135,7 @@ int print_bits()
  {
  int byte_count, bit_count, bit_index;
  char temp;
+ int indx = 0;
 
  /* Step through each byte in the padded_fascn. If its a 1, print a 1 */
  /* else print a 0.  Also, print a space after every 5th print so the */
@@ -140,17 +144,47 @@ int print_bits()
  for (bit_count = 0, byte_count = 0; byte_count < 25; byte_count++) {
    temp = padded_fascn[byte_count];
    for (bit_index=0; bit_index < 8; bit_index++) {
-    if (mask & temp) /* is the most significant bit a 1? */
+    if (mask & temp) {/* is the most significant bit a 1? */
       putchar('1');  /* if it a 1, print a 1 */
-    else
+      outputString[indx++] = '1';
+      }
+    else {
       putchar('0');  /* if its not a 1, it must be a 0 so print o */
+      outputString[indx++] = '0';
+      }
     temp <<= 1; /* shift left to prepare the next bit for testing */
     bit_count += 1;
-    if ((bit_count % 5)== 0) /* is this the 5th 1 or 0 printed? */
-  putchar(' '); /* add a space between 5-bit characters */ }
+    if ((bit_count % 5)== 0) { /* is this the 5th 1 or 0 printed? */
+      putchar(' '); /* add a space between 5-bit characters */
+      outputString[indx++] = ' ';
+      }
+    }
    } /* end for */
+  outputString[239] = '\0';
   return(0);
   }
+
+
+ /******************************************************************/
+ /*                                                                */
+ /* Compare the output string agains an expected string            */
+ /*                                                                */
+ /******************************************************************/
+
+int compare_output_string( char expected_string[240] )
+{
+ int char_count = 0;
+ while( char_count < 240 ) {
+  if( outputString[char_count] != expected_string[char_count] ) {
+    printf("Error encountered in output string at charater # %d\n",char_count );
+    printf("Expected  %d \n", expected_string[char_count] );
+    printf("and found %d \n", outputString[char_count] );
+    exit(1);
+    }
+  char_count++;
+  }
+}
+
 
  /******************************************************************/
  /*                                                                */
@@ -200,6 +234,10 @@ int lrc()
 
  /* Expand the checksum (LRC) at offset 39 */
 
+ int checksumvalue = checksum;
+
+ printf("LRC = %d\n",checksumvalue);
+
  expanded_fascn[39] = checksum;
  return(0);
 }
@@ -223,6 +261,8 @@ int lrc()
 /******************************************/
 
 char ac[4], sc[4], cn[6],cs[1], ici[1], pi[10], oc[1], oi[4], poa[1];
+char expectedlrc[1];
+char expected_string[240];
 
 main(argc, argv)
 int  argc;
@@ -236,11 +276,13 @@ char *argv[];
  /* provide a warning message and terminate the program. Show what the    */
  /* correct call should be.                                               */
 
- if (argc != 10) {
+ if (argc != 12) {
   printf("Incorrect number of arguments for this function \n");
-  printf("fascn ac sc cn cs ici pi oc oi poa\n");
-  exit(0); }
-         /* initialize */
+  printf("fascn ac sc cn cs ici pi oc oi poa expectedlrc\n");
+  exit(1);
+  }
+
+ /* initialize */
 
  /* copy the strings into more meaningful nmenoics for */
 
@@ -253,6 +295,9 @@ char *argv[];
   strncpy(oc, argv[7], 1);
   strncpy(oi, argv[8], 4);
   strncpy(poa,argv[9], 1);
+  strncpy(expectedlrc,argv[10], 1);
+  strncpy(expected_string,argv[11], 240);
+  expected_string[239]='\0';
 
  /* Expand the Agnecy Code (ac) starting at offset 1 */
 
@@ -306,5 +351,15 @@ char *argv[];
 
  print_bits();
 
+ printf("Output String = %s\n", outputString);
+
+ compare_output_string( expected_string );
+
+ if( expanded_fascn[39] != expectedlrc[0] ) {
+   printf("Incorrect LRC\n");
+   exit(1);
+   }
+
+ exit(0);
 }
 
