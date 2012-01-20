@@ -46,3 +46,9 @@ add_test(fascnParse
   ${PROJECT_SOURCE_DIR}/test/fascn.dat
   )
 
+
+add_test(AgencyCheck
+  ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/AgencyCheck
+  ${PROJECT_SOURCE_DIR}/test/fascn.dat
+  )
+

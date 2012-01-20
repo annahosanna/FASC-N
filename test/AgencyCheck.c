@@ -41,7 +41,7 @@ is part of the DoD or VA and then  what their ID number
 
 /******************************************/
 
-main(argc, argv)
+int main(argc, argv)
 int  argc;
 char *argv[];
 {
@@ -72,5 +72,6 @@ char *argv[];
  }
  printf("The ID Number is: %lld\n",PI_number(expanded_fascn));
 
+ return(0);
 }
 
