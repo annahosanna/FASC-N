@@ -41,3 +41,8 @@ add_test(fascnOut
   )
 
 
+add_test(fascnParse
+  ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/fascnParse
+  ${PROJECT_SOURCE_DIR}/test/fascn.dat
+  )
+

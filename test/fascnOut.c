@@ -267,7 +267,7 @@ int lrc()
 char ac[4], sc[4], cn[6],cs[1], ici[1], pi[10], oc[1], oi[4], poa[1];
 
 
-main(argc, argv)
+int main(argc, argv)
 int  argc;
 char *argv[];
 {
@@ -352,5 +352,6 @@ char *argv[];
 
  compare_with_expected_fascn();
 
+ return(0);
 }
 

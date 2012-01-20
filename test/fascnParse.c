@@ -50,7 +50,7 @@ with the proper programming scope. A default of 'Z' is used in this test.
 
 /******************************************/
 
-main(argc, argv)
+int main(argc, argv)
 int  argc;
 char *argv[];
 {
@@ -70,5 +70,7 @@ char *argv[];
   printf("The Organizational Category is: %d\n", organizational_category(expanded_fascn));
   printf("The Organizational Identifier is: %d\n", organizational_identifier(expanded_fascn));
   printf("The Person/Organization Association Category is: %d\n", person_organization_association(expanded_fascn));
+
+  return(0);
 }
 
